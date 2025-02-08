@@ -16,6 +16,12 @@ graph TD
     Logic -->|Data_Request| Repository[Repository_Layer]
     Repository -->|Local_Storage| SQLite[SQLite_Database]
     Repository -->|Remote_Sync| API[Remote_API]
+
+    %% UI_Layer: UI 层 (Flutter)
+    %% Logic_Layer: 业务逻辑层
+    %% Repository_Layer: 数据仓库层
+    %% SQLite_Database: 本地 SQLite 数据库
+    %% Remote_API: 远程 API (Python + PostgreSQL)
 ```
 
 ## 3. 客户端设计设想
