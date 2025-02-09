@@ -1,0 +1,4 @@
+enum TimerType {
+  forward,
+  countdown,
+}
