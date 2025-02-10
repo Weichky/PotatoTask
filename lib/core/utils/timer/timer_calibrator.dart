@@ -1,12 +1,12 @@
 import 'dart:async';
 
 class TimerCalibrator {
-  final int _minBase = 10;
+  final int _minBase = 2;
   final Duration testDuration;
 
   /// Constructs a TimerCalibrator with a specified test duration.
   /// The test duration must be greater than `_minBase` seconds.
-  TimerCalibrator({this.testDuration = const Duration(seconds: 60)});
+  TimerCalibrator({this.testDuration = const Duration(seconds: 4)});
 
   /// Calibrates the timer drift and returns the expected duration for 1 second.
   /// This helps in adjusting for timer inaccuracies across different devices.

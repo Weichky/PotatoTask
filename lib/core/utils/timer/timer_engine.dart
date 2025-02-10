@@ -18,7 +18,11 @@ class TimerEngine {
     this.onTick,
     this.onComplete,
     this.onAbort,
-  });
+  }) {
+    onTick ??= (elapsed) => _elapsed;
+    onComplete ??= () {return;};
+    onAbort ??= (elapsed) => _elapsed;
+  }
 
   void start() {
     _stop();
