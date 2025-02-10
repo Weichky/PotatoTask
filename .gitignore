@@ -48,3 +48,10 @@ app.*.map.json
 lib/tree.md
 
 test/
+linux/
+ios/
+Android/
+Windows/
+.metadata
+analysis_options.yaml
+pubspec.lock
