@@ -24,9 +24,8 @@ class TimerCalibrator {
 
     int tickCount = 0;
     Completer<Duration> completer = Completer<Duration>();
-    Timer? timer;
 
-    timer = Timer.periodic(Duration(seconds: 1), (timer) {
+    Timer timer = Timer.periodic(Duration(seconds: 1), (timer) {
       tickCount++;
       Duration expectedElapsed = Duration(seconds: tickCount);
       Duration actualElapsed = stopwatch.elapsed;
@@ -66,6 +65,8 @@ class TimerCalibrator {
         completer.complete(driftDuration);
       }
     });
+
+    timer.cancel();
 
     return completer.future;
   }
