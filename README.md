@@ -6,6 +6,11 @@
 ## 开发日志
 ### WIP阶段
 #### Pre-Alpha 10-Feb-25
+主要专注于SimpleTimer内方法和矫正实现。
+- 实现了SimpleTimer的create()方法等
+- 完成部分矫正算法
+
+#### Pre-Alpha 10-Feb-25
 继续实现Timer功能。
 - 实现了core/utils/timer/TimerEngine计时逻辑，下一步可以与TimerCalibrator整合到SimpleTimer里
 - 实现了SimpleTimer的部分方法

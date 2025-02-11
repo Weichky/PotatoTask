@@ -10,13 +10,16 @@ class SimpleTimer {
   Duration _driftAccumulationTime;
 
   bool _isAutoCalibrate;
+  bool _isCalibrating;
 
   TimerEngine? _timerEngine;
+  TimerCalibrator? _timerCalibrator;
 
   SimpleTimer({
     Duration? driftAccumulationTime,
   }) :
     _driftAccumulationTime = driftAccumulationTime ?? Duration.zero,
+    _isCalibrating = false,
     _isAutoCalibrate = driftAccumulationTime == null {
         if (_isAutoCalibrate) {
           _driftAccumulationTime = _defaultDriftAccumulationTime;
@@ -32,8 +35,14 @@ class SimpleTimer {
     }
 
     if (_isAutoCalibrate) {
-      TimerCalibrator timerCalibrator =TimerCalibrator();
-      _driftAccumulationTime = await timerCalibrator.calibrate();
+      _isCalibrating = true;
+      _timerCalibrator =TimerCalibrator();
+
+      _timerCalibrator!.fetchDrift().then((drift) {
+        _driftAccumulationTime = drift;
+        _isCalibrating = false;
+        _timerCalibrator = null;
+      });
     }
 
     _timerEngine = TimerEngine(
@@ -45,13 +54,29 @@ class SimpleTimer {
   void delete() {
     if (_timerEngine == null) {
       return;
-    } else if (_timerEngine!.isRunning == true) {
-      _timerEngine!.abort();
+    } else if (_timerEngine!.isRunning) {
+      stop();
     }
+
+    _timerEngine = null;
   }
 
   void stop() {
+    if (_timerEngine == null) {
+      return;
+    } else if (!_timerEngine!.isRunning) {
+      return;
+    } else {
+        _timerEngine!.abort();
+    }
+  }
 
+  void start() {
+    if (_timerEngine == null) {
+    throw StateError('You must call create() before calling start().');
+    }
+
+    _timerEngine!.start();
   }
 
   void setAutoCalibrate() {
@@ -62,5 +87,23 @@ class SimpleTimer {
   void setFixedCalibrate(Duration time) {
     _isAutoCalibrate = false;
     _driftAccumulationTime = time;
+  }
+
+
+  Future<void> _calibrate() {
+    Timer timer;
+    Duration driftAccumulationTime = _driftAccumulationTime;
+    if (_isAutoCalibrate) {
+      if (_isCalibrating) {
+        Timer(_timerCalibrator!.testDuration, () {
+
+        });
+
+
+        timer = Timer.periodic(_driftAccumulationTime, (timer) {
+          
+        });
+      }
+    }
   }
 }

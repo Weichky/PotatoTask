@@ -10,7 +10,7 @@ class TimerCalibrator {
 
   /// Calibrates the timer drift and returns the expected duration for 1 second.
   /// This helps in adjusting for timer inaccuracies across different devices.
-  Future<Duration> calibrate() async {
+  Future<Duration> fetchDrift() async {
     if (testDuration <= Duration(seconds: _minBase)) {
       throw ArgumentError(
           'Test duration must be greater than $_minBase seconds. (Given: ${testDuration.inSeconds} seconds)');
