@@ -5,7 +5,7 @@
 ----
 ## 开发日志
 ### WIP阶段
-#### Pre-Alpha 10-Feb-25
+#### Pre-Alpha 11-Feb-25
 主要专注于SimpleTimer内方法和矫正实现。
 - 实现了SimpleTimer的create()方法等
 - 完成部分矫正算法
